@@ -1,0 +1,41 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+from sklearn.cluster import KMeans
+from sklearn.preprocessing import LabelEncoder, StandardScaler
+
+# 1. Karga Dadus
+df = pd.read_csv(
+    r"C:\Users\LENOVO\Documents\python-projects\streamlit\Mall_Customers.csv"
+)
+
+# 2. Transforma koluna Genre ba numeru
+le = LabelEncoder()
+df["Genre_Encoded"] = le.fit_transform(df["Genre"])
+
+# 3. Inklui feature 4 hotu
+X = df[["Genre_Encoded", "Age", "Annual Income (k$)", "Spending Score (1-100)"]]
+
+# 4. Normaliza dadus
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# 5. Teste K husi 2 to'o 10 hodi hetan valor Elbow (WCSS)
+wcss = []
+K_range = range(2, 11)
+
+for k in K_range:
+  kmeans = KMeans(n_clusters=k, random_state=42, n_init=10)
+  kmeans.fit(X_scaled)
+  wcss.append(kmeans.inertia_)
+
+# 6. Plota Gráfiku Elbow Method Mesak De'it
+plt.figure(figsize=(7, 5))
+plt.plot(K_range, wcss, marker="o", color="b", linewidth=2, markersize=6)
+plt.title("Elbow Method (WCSS) ba Segmentasaun Kliente", fontsize=12)
+plt.xlabel("Numeru Cluster (K)", fontsize=10)
+plt.ylabel("WCSS (Inertia)", fontsize=10)
+plt.grid(True, linestyle="--", alpha=0.6)
+
+# Salva fail imajen ho naran 'elbow.png' atu upload kedas ba Overleaf
+plt.savefig("elbow.png", bbox_inches="tight", dpi=300)
+plt.show()
