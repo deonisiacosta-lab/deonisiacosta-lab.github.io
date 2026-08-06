@@ -38,3 +38,12 @@ Aplikasaun web interativu no pipeline machine learning ne'ebé dezenvolve hodi h
    ```bash
    git clone [https://github.com/deonisiacosta-lab/deonisiacosta-lab.github.io.git](https://github.com/deonisiacosta-lab/deonisiacosta-lab.github.io.git)
    cd deonisiacosta-lab.github.io
+
+👥 Autor / Ekipa Projetu
+Deonisia da Costa
+
+Ernia Hornai
+
+Julito Gonsalves
+
+Oscar Cardoso
